@@ -7,13 +7,14 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"qol-teditor/handlers"
 	"time"
 
 	"github.com/gobuffalo/packr/v2"
 	"github.com/gorilla/mux"
 )
 
-var templates *template.Template
+var t *template.Template
 
 func redirectToHTTPS(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -32,13 +33,13 @@ func redirectToHTTPS(handler http.Handler) http.Handler {
 func init() {
 	// Create html tmeplates using packrv2
 	htmlBox := packr.New("html", "./html")
-	templates = template.New("")
+	t = template.New("")
 	err := htmlBox.Walk(func(p string, f packr.File) error { // Create template for each "file" in packr box
 		h, err := htmlBox.Find(p)
 		if err != nil {
 			return err
 		}
-		_, err = templates.New(p).Parse(string(h))
+		_, err = t.New(p).Parse(string(h))
 		if err != nil {
 			return err
 		}
@@ -104,5 +105,5 @@ func main() {
 }
 
 func EditorHandler(w http.ResponseWriter, r *http.Request) {
-	templates.ExecuteTemplate(w, "editor.html", "")
+	handlers.Editor(w, r, t)
 }
