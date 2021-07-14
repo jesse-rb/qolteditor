@@ -10,7 +10,6 @@ import (
 	"qol-teditor/handlers"
 	"time"
 
-	"github.com/gobuffalo/packr/v2"
 	"github.com/gorilla/mux"
 )
 
@@ -31,23 +30,8 @@ func redirectToHTTPS(handler http.Handler) http.Handler {
 }
 
 func init() {
-	// Create html tmeplates using packrv2
-	htmlBox := packr.New("html", "./html")
-	t = template.New("")
-	err := htmlBox.Walk(func(p string, f packr.File) error { // Create template for each "file" in packr box
-		h, err := htmlBox.Find(p)
-		if err != nil {
-			return err
-		}
-		_, err = t.New(p).Parse(string(h))
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-	if err != nil {
-		log.Println(err)
-	}
+	// Create html tmeplates
+	t = template.Must(template.ParseGlob("./html/*.html"))
 }
 
 func main() {
@@ -58,9 +42,8 @@ func main() {
 	// Setup routes using gorilla/mux package
 	r := mux.NewRouter()
 
-	// Serve static files using packrv2
-	staticBox := packr.New("static", "./static")
-	r.Handle("/static/", http.StripPrefix("/static/", http.FileServer(staticBox)))
+	// Serve static files
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 
 	// Serve routes
 	r.HandleFunc("/", EditorHandler)

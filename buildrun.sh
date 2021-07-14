@@ -11,17 +11,8 @@ function handle_error {
 }
 
 # Build
-~/go/bin/packr2 clean
-handle_error 'packr2 clean initial'
-
-~/go/bin/packr2
-handle_error 'packr2'
-
 go build -o ./target/main.exe main.go
 handle_error 'Compilation'
-
-~/go/bin/packr2 clean
-handle_error 'packr2 clean after'
 
 # Run
 ./target/main.exe
