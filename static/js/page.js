@@ -41,16 +41,18 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
                 _element.insertBefore(_caret, _element.children[_caretPos])
             }
         } else if (e.key == 'Backspace') {
-            _runes[_caretPos-1].Remove();
-            _runes.splice(_caretPos, 1);
-            _caretPos --;
+            if (_caretPos > 0) {
+                _runes[_caretPos-1].Remove();
+                _runes.splice(_caretPos-1, 1);
+                _caretPos --;
+            }
         } else if (!e.meta && !e.ctrlKey && !e.altKey && !(e.key == 'Shift')) { // All general keys
             let r = new rune(_element, e.key)
             _runes.splice(_caretPos, 0, r);
             r.Render(_caretPos);
             _caretPos ++;
             _element.removeChild(_caret);
-            if (_element.children[_caretPos+1] != undefined) {
+            if (_element.children[_caretPos] != undefined) {
                 _element.insertBefore(_caret, _element.children[_caretPos]);
             } else {
                 _element.appendChild(_caret);
