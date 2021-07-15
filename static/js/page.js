@@ -15,10 +15,8 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
 
     let _runes = [];
     let _element;
-    
-    let _caretPos = 0;
-    let _caret = document.createElement('pre');
-    _caret.textContent = _cursor;
+
+    let _caretManager;
 
     let _selected = {
         c: '',
@@ -29,42 +27,18 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
     let pageInput = function(e) {
         // Wrap each symbol in span to be styled individually        
         if (e.key == 'ArrowRight') { // Handle left and right arrow keys
-            if (_caretPos < _runes.length) {
-                _caretPos ++;
-                _element.removeChild(_caret);
-                _element.insertBefore(_caret, _element.children[_caretPos])
-            }
+            _caretManager.SyncedMove(1);
         } else if (e.key == 'ArrowLeft') {
-            if (_caretPos > 0) {
-                _caretPos --;
-                _element.removeChild(_caret);
-                _element.insertBefore(_caret, _element.children[_caretPos])
-            }
+            _caretManager.SyncedMove(-1);
         } else if (e.key == 'Backspace') {
-            if (_caretPos > 0) {
-                _runes[_caretPos-1].Remove();
-                _runes.splice(_caretPos-1, 1);
-                _caretPos --;
-            }
+            _caretManager.SyncedBackspace();
         } else if (!e.meta && !e.ctrlKey && !e.altKey && !(e.key == 'Shift')) { // All general keys
-            let r;
             if (e.key == 'Enter') {
-                r = new rune(_element, '\n')
+                _caretManager.SyncedInsert('\n');
             } else {
-                r = new rune(_element, e.key)
-            }
-            _runes.splice(_caretPos, 0, r);
-            r.Render(_caretPos);
-            _caretPos ++;
-            _element.removeChild(_caret);
-            if (_element.children[_caretPos] != undefined) {
-                _element.insertBefore(_caret, _element.children[_caretPos]);
-            } else {
-                _element.appendChild(_caret);
+                _caretManager.SyncedInsert(e.key);
             }
         }
-
-        
 
         e.preventDefault();
     }
@@ -72,10 +46,6 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
     this.GetSelection = function() {
         return _selected;
     }
-
-    // this.GetContent = function() {
-    //     return _content;
-    // }
 
     this.Render = function() {
         _element = document.createElement('div');
@@ -90,10 +60,11 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
         _element.style.setProperty('font-family', _fontFam);
         _element.style.setProperty('font-size', _fontSize);
 
-        _element.appendChild(_caret);
-
         _element.className = 'page';
 
         parentElement.appendChild(_element);
+
+        _caretManager = new caretManager(_element);
+        _caretManager.Add(0, _cursor, '#AA00AA'); // Add default caret
     }
 }
