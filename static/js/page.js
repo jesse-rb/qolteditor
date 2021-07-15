@@ -39,7 +39,11 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
             if (e.key == 'Enter') {
                 _caretManager.SyncedInsert('\n');
             } else {
-                _caretManager.SyncedInsert(e.key);
+                let key = e.key;
+                if (!key) {
+                    key = String.fromCharCode(e.code);
+                }
+                _caretManager.SyncedInsert(key);
             }
         } else if (e.ctrlKey) {
             // TODO: Add copy, cut and paste support
