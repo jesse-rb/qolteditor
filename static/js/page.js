@@ -32,6 +32,8 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
             _caretManager.SyncedMove(-1);
         } else if (e.key == 'Backspace') {
             _caretManager.SyncedBackspace();
+        } else if (e.key == 'Delete') {
+            _caretManager.SyncedDelete();
         } else if (!e.metaKey && !e.ctrlKey && !e.altKey && !(e.key == 'CapsLock') && !(e.key == 'Shift')) { // All general keys
             console.log('General key: ', e);
             if (e.key == 'Enter') {

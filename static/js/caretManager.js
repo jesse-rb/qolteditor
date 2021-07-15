@@ -32,6 +32,14 @@ function caretManager(parentElement) {
         }
     }
 
+    this.SyncedDelete = function() {
+        for (c of _carets) {
+            if (!(c.GetPos() + 1 > _runeManager.Count())) {
+                _runeManager.RemoveAt(c.GetPos());
+            }
+        }
+    }
+
     this.SyncedInsert = function(rune) {
         for (c of _carets) {
             _runeManager.InsertAt(c.GetPos(), rune);
