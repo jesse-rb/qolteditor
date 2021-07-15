@@ -16,3 +16,24 @@ pre {
     display: inline;
     margin: 0;
 }
+
+.caret {
+    animation-name: caret-blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes caret-blink {
+    0% {
+        visibility: visible;
+    }
+    50% {
+        visibility: visible;
+    }
+    51% {
+        visibility: hidden;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
