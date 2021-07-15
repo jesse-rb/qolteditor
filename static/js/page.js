@@ -47,7 +47,12 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
                 _caretPos --;
             }
         } else if (!e.meta && !e.ctrlKey && !e.altKey && !(e.key == 'Shift')) { // All general keys
-            let r = new rune(_element, e.key)
+            let r;
+            if (e.key == 'Enter') {
+                r = new rune(_element, '\n')
+            } else {
+                r = new rune(_element, e.key)
+            }
             _runes.splice(_caretPos, 0, r);
             r.Render(_caretPos);
             _caretPos ++;
@@ -57,8 +62,6 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
             } else {
                 _element.appendChild(_caret);
             }
-            
-            
         }
 
         
