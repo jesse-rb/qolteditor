@@ -24,10 +24,11 @@ function caretManager(parentElement) {
 
     this.SyncedBackspace = function() {
         for (c of _carets) {
-            _runeManager.RemoveAt(c.GetPos()-1);
-            c.Move(-1);
-            c.Render(append(c));
-            
+            if (!(c.GetPos()-1 < 0)) {
+                _runeManager.RemoveAt(c.GetPos()-1);
+                c.Move(-1);
+                c.Render(append(c));
+            }
         }
     }
 

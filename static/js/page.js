@@ -39,6 +39,15 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
             } else {
                 _caretManager.SyncedInsert(e.key);
             }
+        } else if (e.ctrlKey) {
+            // TODO: Add copy, cut and paste support
+            if (e.key == 'v' || e.key == 'V') {
+                console.log('ctrl v');
+            } else if (e.key == 'c' || e.key == 'C') {
+                console.log('ctrl c');
+            } else if (e.key == 'x' || e.key == 'X') {
+                console.log('ctrl x');
+            }
         }
 
         e.preventDefault();
