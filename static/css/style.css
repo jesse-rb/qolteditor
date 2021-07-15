@@ -3,7 +3,7 @@ body {
     background-color: #9e9e9e;
 }
 
-#pages>.page {
+.page {
     display: inline-block;
     margin-top: 30px;
     margin-left: 30px;
@@ -12,15 +12,15 @@ body {
     overflow: auto;
 }
 
-pre {
-    display: inline;
-    margin: 0;
-}
-
-.caret {
+.page:focus .caret {
     animation-name: caret-blink;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+}
+
+pre {
+    display: inline;
+    margin: 0;
 }
 
 @keyframes caret-blink {
