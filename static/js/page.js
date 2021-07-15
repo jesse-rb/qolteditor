@@ -43,7 +43,7 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
                 if (!key) {
                     key = String.fromCharCode(e.code);
                 }
-                _caretManager.SyncedInsert(key);
+                _caretManager.SyncedInsert(''+key);
             }
         } else if (e.ctrlKey) {
             // TODO: Add copy, cut and paste support
