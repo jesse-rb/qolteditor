@@ -39,15 +39,8 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
             if (e.key == 'Enter') {
                 _caretManager.SyncedInsert('\n');
             } else {
-                let stringKey = '';
-                const code = e.which || e.code;
-                let key = e.key;
-                if (!key) {
-                    key = String.fromCharCode(code);
-                }
-                stringKey += key;
-
-                _caretManager.SyncedInsert(key);
+                // TODO: Figure out how to support Mobile Keyboard to get rid of 'Unidentified' error
+                _caretManager.SyncedInsert(e.key);
             }
         } else if (e.ctrlKey) {
             // TODO: Add copy, cut and paste support
