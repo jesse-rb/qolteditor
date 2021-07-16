@@ -13,9 +13,14 @@ body {
 }
 
 .page:focus .caret {
+    display: inline;
     animation-name: caret-blink;
     animation-duration: 1s;
     animation-iteration-count: infinite;
+}
+
+.caret {
+    display: none;
 }
 
 pre {
