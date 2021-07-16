@@ -16,4 +16,42 @@ function runesManager(parentElement) {
     this.Count = function() {
         return _runes.length;
     }
+
+    // Styling global
+    this.SetGlobalColor = function(color) {
+        for (r of _runes) {
+            r.SetColor(color);
+        }
+    }
+
+    this.SetGlobalBackgroundColor = function(color) {
+        for (r of _runes) {
+            r.SetBackgroundColor(color);
+        }
+    }
+
+    this.SetGlobalSize = function(size) {
+        for (r of _runes) {
+            r.SetSize(size);
+        }
+    }
+
+    // Styling range
+    this.SetRangeColor = function(color, start, end) {
+        for (let i=start; i<=end; i++) {
+            _runes[i].SetColor(color);
+        }
+    }
+
+    this.SetRangeBackgroundColor = function(color, start, end) {
+        for (let i=start; i<=end; i++) {
+            _runes[i].SetBackgroundColor(color);
+        }
+    }
+
+    this.SetRangeSize = function(size, start, end) {
+        for (let i=start; i<=end; i++) {
+            _runes[i].SetSize(size);
+        }
+    }
 }

@@ -1,11 +1,10 @@
 // A caret prototype
-function caret(parentElement, pos, rune, color) {
+function caret(parentElement, pos, rune) {
     let _this = this;
     let _parentElement = parentElement;
     let _pos = pos
     let _rune = rune;
     let _element;
-    let _color = color;
 
     this.Move = function(amount) {
         _pos += amount;
@@ -15,13 +14,15 @@ function caret(parentElement, pos, rune, color) {
         return _pos;
     }
     
-    this.Render = function(append) {
+    this.Render = function(append, style) {
         _element && _parentElement.removeChild(_element);
 
         _element = document.createElement('pre');
         _element.textContent = _rune;
 
-        _element.style.setProperty('color', _color);
+        _element.style.setProperty('color', style.color);
+        _element.style.setProperty('background-color', style.backgroundColor);
+        _element.style.setProperty('font-size', style.size);
 
         _element.className = 'caret';
 

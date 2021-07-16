@@ -13,4 +13,17 @@ function rune(parentElement, rune) {
     this.Remove = function() {
         _parentElement.removeChild(_element);
     }
+
+    // Styling
+    this.SetColor = function(color) {
+        _element.style.setProperty('color', color);
+    }
+
+    this.SetBackgroundColor = function(color) {
+        _element.style.setProperty('background-color', color);
+    }
+
+    this.SetSize = function(size) {
+        _element.style.setProperty('font-size', size);
+    }
 }
