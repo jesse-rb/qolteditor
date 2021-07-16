@@ -65,7 +65,16 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
 
     // Create style object for consistent use
     let composeStyle = function() {
-        return {color: _colorText, backgroundColor: _colorTextBackground, size: _fontSize};
+        return {
+            color: _colorText,
+            backgroundColor: _colorTextBackground,
+            size: _fontSize+'px',
+            pageColor: _colorBackground,
+            pageWidth: _width+'px',
+            pageHeight: _height+'px',
+            pagePadding: _indentTop+'px '+_indentRight+'px '+_indentBottom+'px '+_indentLeft+'px',
+            font: _fontFam
+        };
     }
 
     this.GetSelection = function() {
@@ -80,14 +89,8 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
 
         _element.addEventListener('keydown', pageInput, false);
         _element.addEventListener('contextmenu', paste, false);
-
+        
         _element.contentEditable = true;
-
-        _element.style.setProperty('width', _width+'px');
-        _element.style.setProperty('height', _height+'px');
-        _element.style.setProperty('padding', _indentTop+'px '+_indentRight+'px '+_indentBottom+'px '+_indentLeft+'px');
-        _element.style.setProperty('background-color', _colorBackground);
-        _element.style.setProperty('font-family', _fontFam);
 
         _element.className = 'page';
 
@@ -99,10 +102,8 @@ function page(parentElement, width, height, indentTop, indentRight, indentBottom
         _caretManager = new caretManager(_element);
         _caretManager.Add(0, _cursor, composeStyle()); // Add default caret
 
-        _caretManager.GlobalStyle(composeStyle());
-
         // Init page style bar
-        _styleBar = new styleBar(divPageContainer, _caretManager, composeStyle());
+        _styleBar = new styleBar(divPageContainer, _caretManager, _element, composeStyle());
         _styleBar.Render();
     }
 }

@@ -51,7 +51,7 @@ function caretManager(parentElement) {
     this.GlobalStyle = function(style) {
         style.color && _runeManager.SetGlobalColor(style.color);
         style.backgroundColor && _runeManager.SetGlobalBackgroundColor(style.backgroundColor);
-        style.size && _runeManager.SetRangeSize(style.size);
+        style.size && _runeManager.SetGlobalSize(style.size);
     }
 
     this.SyncedRangeStyle = function(style) {

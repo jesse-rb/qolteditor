@@ -28,8 +28,20 @@ pre {
     margin: 0;
 }
 
-.style-control > *{
-    margin-left: 10px;
+.style-bar {
+    display: flex;
+    flex-direction: row;
+}
+
+.style-control{
+    margin-right: 10px;
+}
+
+.style-control > * {
+    margin-right: 10px;
+}
+.style-control > input[type="number"] {
+    width: 50px;
 }
 
 @keyframes caret-blink {
